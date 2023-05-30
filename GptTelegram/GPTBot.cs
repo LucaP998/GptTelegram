@@ -1,4 +1,4 @@
-﻿#define SEND_WELCOME_MESSAGES
+﻿//#define SEND_WELCOME_MESSAGES
 
 using OpenAI_API;
 using OpenAI_API.Models;
@@ -144,6 +144,8 @@ namespace GptTelegram
         private static void StartNewConversation()
         {
             chat = api.Chat.CreateConversation();
+            chat.Model = Model.ChatGPTTurbo;
+            chat.AppendSystemMessage(string.IsNullOrEmpty(Settings.systemMessage) ? "You are ChatGPT, a helpful assistant." : Settings.systemMessage);
             SendMessage("The conversation has been reset");
         }
 
